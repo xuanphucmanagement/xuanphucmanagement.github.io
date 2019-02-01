@@ -1,0 +1,661 @@
+pdf-service.ts:71<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+@page {
+	margin-top: 1px;
+	margin-bottom: 1px;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+@media print {
+body {
+	margin-top: 1px;
+	margin-bottom: 1px;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+}
+@font-face {
+	font-family: fontDocument;
+	src: url(asset/fonts/times.ttf)
+}
+.pageBreak {
+	page-break-before: always;
+}
+.documentMargin {
+	font-family: Times, "Times New Roman";
+	font-family: fontDocument;
+	margin : 0;
+	padding: 0;
+}
+.pageSize {
+	size: A4;
+}
+.headerPage {
+	height: 35px;
+	border-right: 2px solid #000000;
+	border-top: 2px solid #000000;
+	border-left: 2px solid #000000;
+}
+.headerPageTitle {
+	float: left;
+	width: 40%;
+	height: 100%;
+	font-size: 26px;
+	text-align: left;
+	line-height: 40px;
+	font-weight: bold;
+}
+.headerPageDriver {
+	float: left;
+	width: 10%;
+	height: 100%;
+	border-left: 2px solid #000000;
+	font-size: 26px;
+	text-align: left;
+	line-height: 40px;
+	font-weight: bold;
+}
+.headerPageDate {
+	float: left;
+	width: 49%;
+	border-left: 2px solid #000000;
+	height: 100%;
+	font-weight: bold;
+}
+.headerPageDateTop {
+	width: 100%;
+	border-bottom: 2px solid #000000;
+	height: 50%;
+}
+.headerPageDateDuong {
+	float: left;
+	width: 49.4%;
+	height: 50%;
+	font-size: 15px;
+}
+.headerPageDateAm {
+	float: left;
+	width: 49.4%;
+	border-left: 2px solid #000000;
+	height: 50%;
+	font-size: 15px;
+}
+.headerPageDateVaoRa {
+	float: left;
+	width: 101%;
+	height: 50%;
+	font-size: 15px;
+	border-top: 2px solid #000000;
+}
+.content {
+	height: 1005px;
+	border: 2px solid #000000;
+}
+.contentTop {
+	border-bottom: 2px solid #000000;
+	height: 50%;
+}
+.contentBottom {
+	height: 50%;
+}
+.contentSide {
+	width: 33.2%;
+	height: 85%;
+	float: left;
+}
+.contentSideRight {
+	width: 33.2%;
+	height: 85%;
+	float: left;
+	border-left: 2px solid #000000;
+}
+.contentSideCell {
+	width: 100%;
+	height: 16.3%;
+	float: left;
+	border-bottom: 2px solid #000000;
+}
+.contentSideCellLast {
+	width: 100%;
+	height: 16.3%;
+	float: left;
+}
+.contentCenter {
+	width: 33%;
+	height: 85%;
+	float: left;
+	border-left: 2px solid #000000;
+}
+.contentCenterCell {
+	width: 100%;
+	height: 19.7%;
+	float: left;
+	border-bottom: 2px solid #000000;
+}
+.contentCenterCellLast {
+	width: 100%;
+	height: 19.7%;
+	float: left;
+}
+.contentLower {
+	width: 100%;
+	height: 15%;
+	float: left;
+	border-top: 2px solid #000000;
+}
+.contentLowerCell {
+	width: 19.75%;
+	height: 97%;
+	float: left;
+	border-right: 2px solid #000000;
+}
+.contentLowerCellLast {
+	width: 19.76%;
+	height: 97%;
+	float: left;
+}
+.cellContent {
+	width: 100%;
+	height: 26%;
+}
+.cellContentBottom {
+	width: 100%;
+	height: 15%;
+}
+.cellContentGhiChu {
+	width: 100%;
+	height: 22%;
+}
+.contentCellFirst {
+}
+.contentCellTitle {
+	float: left;
+	width: 13%;
+	font-weight: bold;
+}
+.contentCellPlace {
+	float: left;
+	width: 87%;
+	direction: rtl;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.contentCellPlaceBottom {
+	float: right;
+	direction: rtl;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.contentCellName {
+	font-weight: bold;
+	float: left;
+	text-transform: uppercase;
+}
+.contentCellGroup {
+	float: left;
+	font-size: 12px;
+}
+.contentCellGhiChu {
+	float: left;
+	font-size: 12px;
+}
+.contentCellGhiChuBottom {
+	float: left;
+	font-size: 12px;
+}
+.contentCellTinhTrang {
+	float: left;
+	font-size: 12px;
+}
+.contentCellXeMay {
+	float: left;
+	font-size: 12px;
+}
+.contentCellSDT {
+	float: left;
+	font-weight: bold;
+}
+.info {
+	border: 2px solid #000000;
+	height: 50px;
+}
+.infoLeft {
+	width: 50%;
+	height: 100%;
+	float: left;
+	border-bottom: 2px solid #000000;
+	text-align: center;
+	line-height: 25px;
+	font-weight: bold;
+	font-size: 20px;
+}
+.infoRowTopLeft {
+	height: 50%;
+	border-right: 2px solid #000000;
+	border-bottom: 2px solid #000000;
+}
+.infoRowBottomLeft {
+	height: 50%;
+	border-right: 2px solid #000000;
+}
+.infoRowTopRight {
+	height: 50%;
+	border-bottom: 2px solid #000000;
+}
+.infoRowBottomRight {
+	height: 50%;
+}
+.infoRight {
+	height: 100%;
+	font-size: 20px;
+	font-weight: bold;
+}
+.infoData {
+	border-left: 2px solid #000000;
+	border-right: 2px solid #000000;
+	border-bottom: 2px solid #000000;
+	height: 50px;
+}
+.infoLeftData {
+	width: 50%;
+	height: 100%;
+	float: left;
+	border-bottom: 2px solid #000000;
+	text-align: left;
+	line-height: 25px;
+	font-weight: bold;
+	font-size: 20px;
+}
+.infoRow {
+	border-left: 2px solid #000000;
+	border-right: 2px solid #000000;
+	border-bottom: 2px solid #000000;
+	height: 25px;
+	text-align: center;
+	line-height: 25px;
+	font-weight: bold;
+	font-size: 20px;
+}
+.infoRowTop {
+	border-top: 2px solid #000000;
+}
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	border-bottom: 2px solid #000000;
+}
+.wrapper1 {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	float: left;
+	font-size: 18px;
+}
+.wrapper1 td, .wrapper1 th {
+	border-bottom: 2px solid #ddd;
+	padding: 8px;
+}
+.left100 {
+	float: left;
+	width: 100%;
+}
+</style>
+</head>
+<body class="documentMargin">
+<div class="pageSize">
+  <div class="infoRow infoRowTop"> File đón khách xe lớn 2017-10-29 - Vào</div>
+  <div class="wrapper1">
+    <table>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A14</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B7</td>
+        <td>-Tân nghi</td>
+        <td>-01674267254</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B16</td>
+        <td>-Đại chí</td>
+        <td>-0984041328</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B15</td>
+        <td>-Đại chí</td>
+        <td>-01682245519</td>
+      </tr>
+      <tr>
+        <td>★(3Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B18,B19,B20</td>
+        <td>-Đại chí</td>
+        <td>-0976128403</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B10</td>
+        <td>-Tây an</td>
+        <td>-01684623350</td>
+      </tr>
+      <tr>
+        <td>★(0Vé)</td>
+        <td>-(1Súp)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-Súp</td>
+        <td>-Mỹ yên</td>
+        <td>-01666664159</td>
+      </tr>
+      <tr>
+        <td>★(4Vé)</td>
+        <td></td>
+        <td>-(1 Xe số)</td>
+        <td></td>
+        <td></td>
+        <td>-A6,A9,A15,B9</td>
+        <td>-Tây Vinh</td>
+        <td>-0984040125</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A22</td>
+        <td>-An thái</td>
+        <td>-01682466949</td>
+      </tr>
+      <tr>
+        <td>★(2Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A18,A19</td>
+        <td>-An thái</td>
+        <td>-0932028123</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A12</td>
+        <td>-An thái</td>
+        <td>-0914221744</td>
+      </tr>
+      <tr>
+        <td>★(2Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B11,B12</td>
+        <td>-An thái</td>
+        <td>-01679707925</td>
+      </tr>
+      <tr>
+        <td>★(0Vé)</td>
+        <td></td>
+        <td></td>
+        <td>-1 con</td>
+        <td></td>
+        <td>-Hàng</td>
+        <td>-An thái</td>
+        <td>-0987751716</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td>-(1 Xe số)</td>
+        <td></td>
+        <td></td>
+        <td>-A21</td>
+        <td>-Cây 3</td>
+        <td>-0973279284</td>
+      </tr>
+      <tr>
+        <td>★(2Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A4,A5</td>
+        <td>-Cầu trắng</td>
+        <td>-0982511552</td>
+      </tr>
+      <tr>
+        <td>★(0Vé)</td>
+        <td>-(2Súp)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-Súp</td>
+        <td>-Cỏ dại</td>
+        <td>-01697496057</td>
+      </tr>
+      <tr>
+        <td>★(3Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B2,B14,B17</td>
+        <td>-Chánh mẫn</td>
+        <td>-0938933559</td>
+      </tr>
+      <tr>
+        <td>★(2Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A13,A14</td>
+        <td>-Chợ đồn</td>
+        <td>-01667389504</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A2</td>
+        <td>-CvNhơn Lộc</td>
+        <td>-0917685273</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B22</td>
+        <td>-Cx đại tín</td>
+        <td>-01233987459</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B8</td>
+        <td>-Cây3</td>
+        <td>-0935233578</td>
+      </tr>
+      <tr>
+        <td>★(0Vé)</td>
+        <td>-(1Súp)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-Súp</td>
+        <td>-Gò lai</td>
+        <td>-01653549898</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B13</td>
+        <td>-Mỹ Yên</td>
+        <td>-01652381530</td>
+      </tr>
+      <tr>
+        <td>★(2Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A17,B5</td>
+        <td>-N Lộc</td>
+        <td>-01664659311</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B21</td>
+        <td>-N/nghĩatây</td>
+        <td>-01636769342</td>
+      </tr>
+      <tr>
+        <td>★(2Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-B3,B6</td>
+        <td>-Nhơn Lộc</td>
+        <td>-01685012387</td>
+      </tr>
+      <tr>
+        <td>★(0Vé)</td>
+        <td>-(1Súp)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-Súp</td>
+        <td>-Nloc</td>
+        <td>-0974136120</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td>-(1 Xe số)</td>
+        <td></td>
+        <td></td>
+        <td>-B4</td>
+        <td>-Nt N Mỹ</td>
+        <td>-01652987767</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A20</td>
+        <td>-T Kiều</td>
+        <td>-01628330447</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A16</td>
+        <td>-Tây vinh</td>
+        <td>-0964464568</td>
+      </tr>
+      <tr>
+        <td>★(1Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A1</td>
+        <td>-my hòa</td>
+        <td>-01673322832</td>
+      </tr>
+      <tr>
+        <td>★(0Vé)</td>
+        <td>-(1Súp)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-Súp</td>
+        <td>-Ông Khiểng</td>
+        <td>-0964674458</td>
+      </tr>
+      <tr>
+        <td>★(2Vé)</td>
+        <td></td>
+        <td>-(1 Xe số)</td>
+        <td></td>
+        <td></td>
+        <td>-A3,B1</td>
+        <td>-Đại Chí</td>
+        <td>-01673343370</td>
+      </tr>
+    </table>
+  </div>
+  <div class="infoRow infoRowTop left100"> File đón khách xe nhỏ 2017-10-29 - Vào</div>
+  <div class="wrapper1">
+    <table>
+      <tr>
+        <td>★(4Vé)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-A7,A10,A8,A11</td>
+        <td>-Đại an</td>
+        <td>-01676112750</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>
